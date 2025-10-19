@@ -1,0 +1,217 @@
+# Projektdokumentation – *ServerRackSimulator* (C# Konsole)
+
+> **Lehrgang:** Fachinformatiker/25-3
+> **Autor:** Vieregg, Patrick 
+> **Betreuer/Dozent:** Hr Lutz & Hr Hafner
+> **Datum:** \<18.10.2025>\
+> **Version:** 0.1 (Entwurf)
+
+---
+
+## 1. Management Summary (Kurzfassung)
+
+**Ziel:** Ein Konsolen-POC zur Konfiguration von 19"-Racks (9/15/24/42 HE), Befüllen mit 1–4 HE-Server-Einschüben und einfacher **Kosten-/Ausfallrechnung**.\
+**Ergebnis in Kürze:** Nutzer-/Rollenverwaltung (Admin/User), JSON-Persistenz, Vererbungsmodell (BaseServer → He1..He4), erster-freier-Slot-Einbau, Kostenmodell anpassbar.
+
+---
+
+## 2. Ausgangssituation & Zielsetzung
+
+- **Ausgangssituation:** Lernprojekt (Woche 3), Grundlagen in Schleifen, Klassen, Konstruktoren, einfacher Vererbung. 
+- **Projektziel:** Funktionsfähiger Proof-of-Concept zur Rack-Konfiguration inkl. Kostenübersicht und Ausfall-Simulation.
+
+---
+
+## 3. Anforderungen
+
+### 3.1 Muss-Kriterien
+
+- Racks in 9/15/24/42 HE auswählbar.
+- Einsätze 1–4 HE mit Attributen (Typ, Lüftergröße/-anzahl, Netzteile, SSD/HDD, GPU, Herkunft „b / c“).
+- Admin-Templates (b) & User-Customs (c) verwalten.
+- Konfiguration speichern/laden (JSON).
+- Kostenübersicht gesamt & je Einschub.
+- Ausfall-Simulation inkl. Ersatzteilkosten. **TODO**
+
+### 3.2 Soll-/Kann-Kriterien
+
+- Umbenennung der drei Userslots. **Todo**
+- Übersichtlich formatierte Rack-Darstellung.
+
+### 3.3 Abnahmekriterien 
+
+- **Anlegen** von Einsätzen und **Löschen** per #ID funktioniert.
+- **Persistenz**: Nach Neustart sind Templates & Konfigurationen vorhanden.
+- **Kostenanzeige** liefert Summe & Einzelpreise.
+- **Ausfallrechnung** berechnet korrekte Ersatzteilkosten.
+
+---
+
+## 4. Systemübersicht
+
+- **Benutzer & Rollen:** *Admin* (Vorlagen verwalten), *User* (nutzen, umbenennen möglich). **TODO**
+- **Laufzeitumgebung:** .NET 8 (oder 7) Console, Windows/Linux.
+- **Persistenz:** Eine Datei `data.json` im Programmverzeichnis.
+- **Kontext:** Standalone-Konsolenanwendung; keine Netzwerkanbindung.
+- **Annahmen:** HE-Logik: fortlaufende Slots 1..N; erster passender freier Slot wird belegt.
+
+*(Platzhalter für Kontextdiagramm)*
+
+```
+[Benutzer] ──(Konsole)──> ServerRackSimulator ──(JSON)──> data.json
+```
+
+---
+
+## 5. Architektur & Design
+
+### 5.1 Projektstruktur (Dateien)
+
+- `Program.cs` – Menü-Loop, Aktionen (Login, Rack, Kosten, Ausfall), Speichern/Laden
+- `Data/AppData.cs` – zentrale Daten (Users, Templates, Configs, Costs)
+- `Models/Users.cs` – `User`, `Role`
+- `Models/Rack.cs` – `Rack`, `PlacedItem`, `RackConfig`, Rendering
+- `Models/Servers.cs` – `BaseServer` → `He1..He4`, `BaseServerDTO`
+- `Models/Costs.cs` – `CostSettings`, `CostModel`
+
+### 5.2 Design-Entscheidungen
+
+- **Vererbung:** HE-spezifische Typen erben von `BaseServer`.
+- **DTO für JSON:** `BaseServerDTO` vermeidet Polymorphie-Probleme beim Speichern. **Chat GPT-5**
+
+### 5.3 Hauptabläufe
+
+- **Rack-Loop:** Anzeigen → Hinzufügen/Löschen → Speichern → Kosten → Ausfall.
+- **Platzierung:** Finde ersten freien Slot mit ausreichender Höhe, belege HE-Bereich, weise #ID zu. **GPT-5**
+
+### 5.4 Fehlerbehandlung
+
+- Einfache Konsolenhinweise und Validierungen (Bereiche, Zahlen).
+---
+
+## 6. Datenmodell
+
+### 6.1 Kernobjekte
+
+- `User { Name, Role }`
+- `BaseServer { Typ, HeightU, FanMm, FanCount, Netzteile, SSD, HDD, GPU, Origin }`
+- `Rack { Name, TotalU, Items[] }`, `PlacedItem { PlacedId, StartU, Server }`
+- `RackConfig { Name, TotalU, Items[] }`
+- `CostSettings { BasePerU, Fan40/60/80/120, PSU, SSD, HDD, GPU }`
+
+### 6.2 JSON-Struktur simple
+
+```json
+{
+  "Users": [{ "Name": "Admin", "Role": 0 }, { "Name": "User1", "Role": 1 }],
+  "ServerTemplates": [{
+    "Typ": "2HE Compute",
+    "HeightU": 2,
+    "FanMm": 60,
+    "FanCount": 6,
+    "Netzteile": 2,
+    "SSD": 2,
+    "HDD": 4,
+    "GPU": 1,
+    "Origin": "b"
+  }],
+  "Configurations": [{
+    "Name": "Rack 24HE Demo",
+    "TotalU": 24,
+    "Items": [{ "PlacedId": 1, "StartU": 1, "Server": { "Typ": "2HE Compute", "HeightU": 2, "FanMm": 60, "FanCount": 6, "Netzteile": 2, "SSD": 2, "HDD": 4, "GPU": 1, "Origin": "b" } }]
+  }],
+  "Costs": { "BasePerU": 100, "Fan40": 8, "Fan60": 10, "Fan80": 15, "Fan120": 20, "PSU": 120, "SSD": 50, "HDD": 40, "GPU": 300 }
+}
+```
+
+---
+
+## 7. Bedienkonzept (CLI)
+
+### 7.1 Start & Login
+
+- Beim ersten Start wird `data.json` erstellt (Defaults).
+- Login über Menü **[1]** (Admin + 3 User-Slots).
+
+### 7.2 Menüs & Beispiele
+
+- **Hauptmenü:** Login, User-Auswahl, Rack-Auswahl, Custom-Server, Konfigurationen, Einstellungen.
+- **Rack-Menü:** Hinzufügen/Löschen, Speichern, **Kosten**, **Ausfall**.
+- **Darstellung:** Zeilenweise pro HE, Mehrzeilige Belegung für 2–4 HE mit `#ID`-Markierung.
+
+---
+
+## 8. Kostenmodell
+
+### 8.1 Formel
+
+```
+Kosten(Einschub) = BasePerU * HeightU
+                 + FanUnitPrice(FanMm) * FanCount
+                 + PSU * Netzteile
+                 + SSD * SSD
+                 + HDD * HDD
+                 + GPU * GPU
+```
+
+### 8.2 Ausfall-Simulation
+
+- Komponente wählen (Lüfter/PSU/SSD/HDD/GPU) × Anzahl → Ersatzteilkosten.
+- Keine Verfügbarkeits-/Arbeitszeitberechnung (POC).
+
+### 8.3 Parametrisierung
+
+- Anpassbar in **Einstellungen → Kostenmodell**. **TODO**
+
+---
+
+## 9. Use Cases & Testfälle
+
+### 9.1 Use Cases
+
+- **UC-01:** Rack (24 HE) wählen und zwei Einsätze hinzufügen.
+- **UC-02:** Einsatz löschen per #ID.
+- **UC-03:** Konfiguration speichern und erneut laden.
+- **UC-04:** Kosten anzeigen.
+- **UC-05:** Ausfall-Simulation (1× PSU).
+
+### 9.2 Testfälle (manuell)
+
+| ID   | Vorbedingung              | Schritte                                     | Erwartetes Ergebnis                |
+| ---- | ------------------------- | -------------------------------------------- | ---------------------------------- |
+| T-01 | Programm frisch gestartet | Login als Admin → Rack 9 HE → Add 1HE Router | Rack zeigt `1HE … #1`, Kosten > 0  |
+| T-02 | Mind. 1 Einsatz im Rack   | Kosten anzeigen                              | Einzelpreise + Gesamtsumme korrekt |
+| T-03 | Rack mit 2 Einsätzen      | Löschen `#1`                                 | HE-Bereich frei, nur #2 verbleibt  |
+| T-04 | Konfiguration vorhanden   | Speichern → Neustart → Laden                 | Aufbau identisch, IDs neu vergeben |
+| T-05 | Einsatz mit GPU           | Ausfall: 1× GPU                              | Kosten = GPU-Preis                 |
+
+---
+
+## 10. Qualität & Richtlinien
+
+- **Code-Style:** Klar getrennte Methoden, kurze Klassen.
+- **Robustheit:** Eingabevalidierungen (Zahlenbereiche).
+
+---
+
+## 11. Projektplanung (kurz)
+
+- **M1:** Grundgerüst & Menü (Tag 1)
+- **M2:** Vererbung & Platzlogik (Tag 2)
+- **M3:** Persistenz & Laden/Speichern (Tag 3) **ehrlicherweise inkl Zeit am Wochenende**
+- **M4:** Kostenmodell & Ausfall (Tag 4)  **TODO**
+- **M5:** Doku & Tests (Tag 5)    **TODO**
+
+## 12. Dokumentation
+
+### 12.1 Screenshots (Platzhalter)
+
+- *Rack-Ansicht (24 HE) mit zwei Einsätzen*
+- *Kostenübersicht Konsole*
+
+### 12.2 Lizenz & Quellen
+
+- Nur .NET-Standardbibliothek.
+- Beispielpreise fiktiv.
+- Chat-GPT 5 **Thinking mode**
+
