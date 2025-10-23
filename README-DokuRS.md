@@ -4,7 +4,7 @@
 > **Autor:** Vieregg, Patrick 
 > **Betreuer/Dozent:** Hr Lutz & Hr Hafner
 > **Datum:** \<18.10.2025>\
-> **Version:** 0.1 (Entwurf)
+> **Version:** 0.2 (Entwurf)
 
 ---
 
@@ -31,13 +31,12 @@
 - Admin-Templates (b) & User-Customs (c) verwalten.
 - Konfiguration speichern/laden (JSON).
 - Kostenübersicht gesamt & je Einschub.
-- Ausfall-Simulation inkl. Ersatzteilkosten. **TODO**
 
 ### 3.2 Soll-/Kann-Kriterien
 
 - Umbenennung der drei Userslots. **Todo**
 - Übersichtlich formatierte Rack-Darstellung.
-
+- Ausfall-Simulation inkl. Ersatzteilkosten. **TODO**
 ### 3.3 Abnahmekriterien 
 
 - **Anlegen** von Einsätzen und **Löschen** per #ID funktioniert.
@@ -68,7 +67,7 @@
 ### 5.1 Projektstruktur (Dateien)
 
 - `Program.cs` – Menü-Loop, Aktionen (Login, Rack, Kosten, Ausfall), Speichern/Laden
-- `Data/AppData.cs` – zentrale Daten (Users, Templates, Configs, Costs)
+- `Data/AppData.cs` – zentrale Daten (Users, Templates, Configs, Costs), Darstellung
 - `Models/Users.cs` – `User`, `Role`
 - `Models/Rack.cs` – `Rack`, `PlacedItem`, `RackConfig`, Rendering
 - `Models/Servers.cs` – `BaseServer` → `He1..He4`, `BaseServerDTO`
@@ -99,7 +98,7 @@
 - `RackConfig { Name, TotalU, Items[] }`
 - `CostSettings { BasePerU, Fan40/60/80/120, PSU, SSD, HDD, GPU }`
 
-### 6.2 JSON-Struktur simple
+### 6.2 JSON-Struktur
 
 ```json
 {
@@ -126,7 +125,7 @@
 
 ---
 
-## 7. Bedienkonzept (CLI)
+## 7. Bedienkonzept 
 
 ### 7.1 Start & Login
 
@@ -189,18 +188,18 @@ Kosten(Einschub) = BasePerU * HeightU
 
 ## 10. Qualität & Richtlinien
 
-- **Code-Style:** Klar getrennte Methoden, kurze Klassen.
+- **Code-Style:** Klar getrennte Methoden, kurze Klassen, eine Klasse mit Subklassen für d. Darstellung
 - **Robustheit:** Eingabevalidierungen (Zahlenbereiche).
 
 ---
 
 ## 11. Projektplanung (kurz)
 
-- **M1:** Grundgerüst & Menü (Tag 1)
+- **M1:** Grundgerüst & Menü (Tag 1-3)
 - **M2:** Vererbung & Platzlogik (Tag 2)
-- **M3:** Persistenz & Laden/Speichern (Tag 3) **ehrlicherweise inkl Zeit am Wochenende**
-- **M4:** Kostenmodell & Ausfall (Tag 4)  **TODO**
-- **M5:** Doku & Tests (Tag 5)    **TODO**
+- **M3:** Persistenz & Laden/Speichern (Tag 2-4) **ehrlicherweise inkl Zeit am Wochenende**
+- **M4:** Kostenmodell & Ausfall (Tag 3-5)  **TODO**
+- **M5:** Doku & Tests ,mitlaufende Dokumentation (Tag 1-5)    **TODO**
 
 ## 12. Dokumentation
 
@@ -212,6 +211,9 @@ Kosten(Einschub) = BasePerU * HeightU
 ### 12.2 Lizenz & Quellen
 
 - Nur .NET-Standardbibliothek.
-- Beispielpreise fiktiv.
-- Chat-GPT 5 **Thinking mode**
+- Beispieldaten fiktiv, Rechercheaufwand viel zu hoch.
+- Chat-GPT 5. **Thinking mode**
+- Kursunterlagen, speziell ToDoManager.
+- Udemy C# Komplettkurs. **Verlinken ToDo**
+- draw.io Flowchart für Erstplanung
 
