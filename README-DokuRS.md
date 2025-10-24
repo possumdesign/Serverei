@@ -201,6 +201,27 @@ Kosten(Einschub) = BasePerU * HeightU
 - **M4:** Kostenmodell & Ausfall (Tag 3-5)  **TODO**
 - **M5:** Doku & Tests ,mitlaufende Dokumentation (Tag 1-5)    **TODO**
 
+```mermaid
+gantt
+    title A Gantt Diagram
+    dateFormat YY-MM-DD
+    excludes weekends
+    section Coding
+    Beginn: milestone, m1, 2025-10-15, 2m
+    Konzept & Flowchart :a1, 2025-10-15, 2d
+    Start Coding : milestone, m1, 2025-10-16, 2m
+    Einfaches Grundgerüst :a2, 2025-10-16, 1d
+    Grundgerüst erstellt : milestone, m1, 2025-10-17, 2m
+    Erstellung der Klassen :after a1  , 2d
+    Überarbeitung,Fehlersuche :a3, 2025-10-21 , 1d
+    Programm komplett : milestone, m1, 2025-10-22, 2m
+    Überarbeitung Menu:a4, after a3, 2d
+    Fehlersuche,Nachbearbeitung: after a4, 2d
+    Code überarbeitet : milestone, m1, 2025-10-28, 2m
+    section Planung & Dokumentation
+    Live-Dokumentation README-DokuRS :b1, 2025-10-16  , 8d
+    Präsentation :after b1, 1d
+```
 ## 12. Dokumentation
 
 ### 12.1 Screenshots (Platzhalter)
