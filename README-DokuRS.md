@@ -224,10 +224,187 @@ gantt
 ```
 ## 12. Dokumentation
 
-### 12.1 Screenshots (Platzhalter)
+### 12.1 Fehler- und Problembehandlung
+Menu aus ToDo Manager, als Methode: Erwartet Liste aus String, ergibt nach Pfeilauswahl int zurück
+Appdata.cs , Class Robco
+```C#
+public static int Menu(List<string> options)
 
-- *Rack-Ansicht (24 HE) mit zwei Einsätzen*
-- *Kostenübersicht Konsole*
+{
+    Console.OutputEncoding = Encoding.UTF8;
+    Robco.RobcoBG();
+    int auswahl = 0;
+   /* List<string> options = new List<string>()
+{
+    "[1] Eingeloggter User anzeigen/wechseln (Login)",
+    "[2] User Auswahl (3 Slots verwalten)",
+    "[3] Größenauswahl des Racks (9/15/24/42 HE)",
+    "[4] Erstellen Custom Server (1-4 HE)",
+    "[5] Konfigurierte Racks (speichern/laden/löschen)",
+    "[6] Einstellungen (Namen & Vorlagen & Kosten)",
+    "[0] Beenden",
+};   */
+    while (true)
+    {
+
+        Console.Clear();
+        Console.WriteLine("\n================");
+        for (int i = 0; i < options.Count; i++)
+        {
+            if (i == auswahl)
+            {
+
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.Write(">> ");
+                Console.Write(options[i]);                        
+                Console.WriteLine(" <<");
+                Console.ForegroundColor = ConsoleColor.Green;
+
+
+            }
+            else
+            {
+                Console.WriteLine(options[i]);
+            }
+        }
+        var key = Console.ReadKey().Key;
+        if (key == ConsoleKey.UpArrow) auswahl--;
+        else if (key == ConsoleKey.DownArrow) auswahl++;
+        if (auswahl < 0) auswahl = options.Count - 1;
+        if (auswahl >= options.Count) auswahl = 0;
+        if (key == ConsoleKey.Enter)
+        {
+            return auswahl;
+            /*  Dokumentieren: beispiel aus ToDoManager
+            if (auswahl == 0)
+            {
+                Console.Clear();
+                Console.WriteLine("\n================");
+                Console.WriteLine("1 ");
+
+
+            }
+            else if (auswahl == 1)
+            {
+                Console.Clear();
+                Console.WriteLine("\n================");
+                Console.WriteLine("2 ");
+
+            }
+            else if (auswahl == 2)
+            {
+                Console.Clear();
+                Console.WriteLine("\n================");
+                Console.WriteLine("3 ");
+
+            }
+            else if (auswahl == 3)
+            {
+                Console.Clear();
+                Console.WriteLine("\n================");
+                Console.WriteLine("4");
+
+            }
+            else if (auswahl == 4)
+            {
+                Console.Clear();
+                Console.WriteLine("\n================");
+                Console.WriteLine("5");
+
+            }
+            else if (auswahl == 5)
+            {
+                Console.Clear();
+                Console.WriteLine("\n================");
+                Console.WriteLine("6");
+
+            }
+            auswahl += 1;
+            Console.WriteLine(auswahl + " gewählt.");
+            Console.ReadKey();
+            */
+
+        }
+    }
+}
+```
+Hierzu aus der Main (Program.cs) die Übergabe und Ergebnisverarbeitung:
+(Fehler durch input++ (input = input +1) behoben. Menu 0-basiert)
+```C#
+static void Main(string[] args)
+{
+    Console.OutputEncoding = Encoding.UTF8;
+
+
+    Robco.RobcoBG();
+
+
+    Console.Clear();
+    Robco.RobcoType("ROB-CO INDUSTRIES (TM) SYSTEMS ONLINE", 15); // eigene classe für den "Robcotype" Effekt, interchangeable mit normalen Console.Writeline
+    Robco.RobcoType("Initialisiere...", 25);
+    Robco.RobcoType("ZAX Mainframe.................Verbunden", 30);
+
+
+
+    LoadOrInit();
+
+    Action_Login();
+
+    
+
+    bool check = true;
+    while (check == true)
+    {
+        
+        ShowHeader();
+        //oben Header, dann Menü unten
+        //ShowMainMenu();
+        var options = new List<string>()
+        {
+        "[1] Eingeloggter User anzeigen/wechseln (Login)",
+        "[2] User Auswahl (3 Slots verwalten)",
+        "[3] Größenauswahl des Racks (9/15/24/42 HE)",
+        "[4] Erstellen Custom Server (1-4 HE)",
+        "[5] Konfigurierte Racks (speichern/laden/löschen)",
+        "[6] Einstellungen (Namen & Vorlagen & Kosten)",
+        "[7] Beenden",
+        };
+
+       
+
+//Console.Write("Auswahl: ");
+int input = Robco.Menu(options);  //es lebt!!
+
+        input++; // Menü gibt 0-basiert zurück. Fehler dokumentieren!
+        switch (input)
+        {
+            case 1: Action_Login();
+                //Console.WriteLine("1"); <-Debughelper
+                break;                              // Eingeloggter User / Login
+            case 2: Action_UserSelect();
+                //Console.WriteLine("2");
+                break;                              // User Auswahl / Umbenennen
+            case 3: Action_RackSelect();
+                //Console.WriteLine("3");
+                break;                              // Rackgrößen
+            case 4: Action_CreateCustomServer();
+                break;                              // Custom 1-4HE (c)
+            case 5: Action_ConfigRacksMenu();
+                break;                              // Konfigurationen verwalten
+            case 6: Action_Settings();
+                break;                              // Einstellungen inkl. Kosten
+            case 7: check = false;
+                break;                              // Beenden
+            default: Message("Ungültige Auswahl.");
+                break;
+        }
+    }
+
+    Save();
+    Robco.RobcoType("Programm beendet.");
+}
+```
+
 
 ### 12.2 Lizenz & Quellen
 
@@ -235,6 +412,6 @@ gantt
 - Beispieldaten fiktiv, Rechercheaufwand viel zu hoch.
 - Chat-GPT 5. **Thinking mode**
 - Kursunterlagen, speziell ToDoManager.
-- Udemy C# Komplettkurs. **Verlinken ToDo**
-- draw.io Flowchart für Erstplanung
-
+- Udemy C# Komplettkurs. https://www.udemy.com/course/die-komplette-csharp-masterclass/
+- draw.io Flowchart für Erstplanung https://app.diagrams.net/
+- Mermaid https://mermaid.js.org/syntax/gantt.html
