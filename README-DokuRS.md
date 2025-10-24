@@ -203,7 +203,7 @@ Kosten(Einschub) = BasePerU * HeightU
 
 ```mermaid
 gantt
-    title A Gantt Diagram
+    title Projektablauf
     dateFormat YY-MM-DD
     excludes weekends
     section Coding
