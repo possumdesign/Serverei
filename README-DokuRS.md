@@ -257,8 +257,10 @@ gantt
 ## 12. Dokumentation
 
 ### 12.1 Fehler- und Problembehandlung
-Menu aus ToDo Manager, als Methode: Erwartet Liste aus String, ergibt nach Pfeilauswahl int zurück
-Appdata.cs , Class Robco
+Das ursprüngliche Menu bestand aus einfacher **do while** Schleife, sowie **string** Übergabe an eine **switch case**.
+Die aktuelle Variante besteht aus einer externen mehrfach nutzbaren Methode:
+(alter Code ist auskommentiert in **program.cs** erhalten)
+- Menu aus ToDo Manager, als Methode: Erwartet Liste aus String, ergibt nach Pfeilauswahl int zurück **Appdata.cs , Class Robco**
 ```C#
 public static int Menu(List<string> options)
 
@@ -436,7 +438,39 @@ int input = Robco.Menu(options);  //es lebt!!
     Robco.RobcoType("Programm beendet.");
 }
 ```
-
+Ein weiterer Designfehler: sich wiederholende "LAufschrift", animierte Version von console.WriteLine:
+- Animierte Schrift:
+```C#
+public static void RobcoType(string text, int delay = 30)
+{
+    foreach (char c in text)
+    {
+        Console.Write(c);
+        System.Threading.Thread.Sleep(delay);
+    }
+    Console.WriteLine();
+}
+```
+- Designschwäche und Umgehung mit einer firststart bool, die sicherstellt, das Code nur einmalig ausgeführt wird.
+```C#
+private static void ShowHeader() 
+{
+    
+    Console.Clear();
+    Console.WriteLine("===============================================");
+    if (firststart ==true)
+    {
+        Robco.RobcoType("        SERVER RACK SIMULATOR....Online ", 25);
+        firststart = false;
+    }
+    else
+        Console.WriteLine("        SERVER RACK SIMULATOR....Online ");
+    Console.WriteLine("===============================================");
+    Console.WriteLine("Eingeloggt: {0}", _currentUser != null ? _currentUser.Name + " (" + _currentUser.Role + ")" : "—");
+    Console.WriteLine("Aktives Rack: {0}", _currentRack != null ? _currentRack.Name : "—");
+    Console.WriteLine();
+}
+```
 
 ### 12.2 Lizenz & Quellen
 
