@@ -17,7 +17,7 @@
 
 ## 2. Ausgangssituation & Zielsetzung
 
-- **Ausgangssituation:** Lernprojekt (Woche 3), Grundlagen in Schleifen, Klassen, Konstruktoren, einfacher Vererbung. 
+- **Ausgangssituation:** Lernprojekt (Anwendungsentwicklung Grundlagen), Grundlagen in Schleifen, Klassen, Konstruktoren und einfacher Vererbung. 
 - **Projektziel:** Funktionsfähiger Proof-of-Concept zur Rack-Konfiguration inkl. Kostenübersicht und Ausfall-Simulation.
 
 ---
@@ -221,17 +221,17 @@ Kosten(Einschub) = BasePerU * HeightU
 ## 10. Qualität & Richtlinien
 
 - **Code-Style:** Klar getrennte Methoden, kurze Klassen, eine Klasse mit Subklassen für d. Darstellung
-- **Robustheit:** Eingabevalidierungen (Zahlenbereiche).
+- **Robustheit:** Eingabevalidierungen (Zahlenbereiche). Pfeiltastenmenu mit fester Eingabe durch *int* - Wert
 
 ---
 
-## 11. Projektplanung (kurz)
+## 11. Projektplanung 
 
 - **M1:** Grundgerüst & Menü (Tag 1-3)
 - **M2:** Vererbung & Platzlogik (Tag 2)
-- **M3:** Persistenz & Laden/Speichern (Tag 2-4) **ehrlicherweise inkl Zeit am Wochenende**
-- **M4:** Kostenmodell & Ausfall (Tag 3-5)  **TODO**
-- **M5:** Doku & Tests ,mitlaufende Dokumentation (Tag 1-5)    **TODO**
+- **M3:** Persistenz & Laden/Speichern (Tag 2-5) **ehrlicherweise inkl Zeit am Wochenende**
+- **M4:** Kostenmodell & Ausfall (Tag 3-7)  
+- **M5:** Doku & Tests ,mitlaufende Dokumentation (Tag 1-7)    
 
 ```mermaid
 gantt
