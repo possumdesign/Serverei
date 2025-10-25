@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -17,7 +17,7 @@ namespace ServerRackSimulator
         public static void RobcoBG()
         {
             Console.BackgroundColor = ConsoleColor.DarkGreen;
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Black;
             Console.Clear();
             //debugMSG
             // Console.WriteLine("ROB-CO INDUSTRIES (TM) SYSTEMS ONLINE");
@@ -31,36 +31,37 @@ namespace ServerRackSimulator
             }
             Console.WriteLine();
         }
-        public static void Menu()
+        public static int Menu(List<string> options)
 
         {
             Console.OutputEncoding = Encoding.UTF8;
             Robco.RobcoBG();
             int auswahl = 0;
-            List<string> options = new List<string>()
-        {
-            "1. Serverrack erstellen",
-            "2. Serverrack laden",
-            "3. Serverrack löschen",
-            "4. Einstellungen",
-            "5. Statistics",
-            "6. Beenden",
-        };
+            /* List<string> options = new List<string>()
+         {
+             "[1] Eingeloggter User anzeigen/wechseln (Login)",
+             "[2] User Auswahl (3 Slots verwalten)",
+             "[3] Größenauswahl des Racks (9/15/24/42 HE)",
+             "[4] Erstellen Custom Server (1-4 HE)",
+             "[5] Konfigurierte Racks (speichern/laden/löschen)",
+             "[6] Einstellungen (Namen & Vorlagen & Kosten)",
+             "[0] Beenden",
+         };   */
             while (true)
             {
 
                 Console.Clear();
-                Console.WriteLine("\n\n\n\n============================================");
+                Console.WriteLine("\n================");
                 for (int i = 0; i < options.Count; i++)
                 {
                     if (i == auswahl)
                     {
 
-                        Console.Write(">> ");
                         Console.ForegroundColor = ConsoleColor.Black;
+                        Console.Write(">> ");
                         Console.Write(options[i]);
-                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine(" <<");
+                        Console.ForegroundColor = ConsoleColor.Green;
 
 
                     }
@@ -76,6 +77,8 @@ namespace ServerRackSimulator
                 if (auswahl >= options.Count) auswahl = 0;
                 if (key == ConsoleKey.Enter)
                 {
+                    return auswahl;
+                    /*  Dokumentieren: beispiel aus ToDoManager
                     if (auswahl == 0)
                     {
                         Console.Clear();
@@ -122,6 +125,7 @@ namespace ServerRackSimulator
                     auswahl += 1;
                     Console.WriteLine(auswahl + " gewählt.");
                     Console.ReadKey();
+                    */
 
                 }
             }
