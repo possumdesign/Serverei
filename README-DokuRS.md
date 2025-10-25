@@ -76,6 +76,38 @@
 ### 5.2 Design-Entscheidungen
 
 - **Vererbung:** HE-spezifische Typen erben von `BaseServer`.
+```mermaid
+classDiagram
+    BaseServer <|-- He1
+    BaseServer <|-- He2
+    BaseServer <|-- He3
+    BaseServer <|-- He4
+    BaseServer : +string origin
+    BaseServer : +String typ
+    BaseServer : +int Heightu
+    BaseServer : +int fanMm
+    BaseServer : +int netzteile
+    BaseServer : +int ssd
+    BaseServer : +int hdd
+    BaseServer : +int gpu
+    BaseServer : public abstract clone()
+    class He1{
+      +int typ 1
+      +public override BaseServer Clone()
+    }
+    class He2{
+      -int typ 2
+      -override()...
+    }
+    class He3{
+      +int typ 3
+      +override()...
+    }
+    class He4{
+      +int typ 4
+      +override()
+    }
+```
 - **DTO für JSON:** `BaseServerDTO` vermeidet Polymorphie-Probleme beim Speichern. **Chat GPT-5**
 
 ### 5.3 Hauptabläufe
