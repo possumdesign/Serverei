@@ -1,7 +1,9 @@
-﻿using System;
+using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
 // ServerRackSimulator
@@ -11,6 +13,7 @@ namespace ServerRackSimulator
 {
     internal class Program
     {
+        public static bool firststart = true;
         private const string DataFile = "data.json"; //immer im Debug Dir, wo das Programm läuft. fool me once...
 
         private static AppData _app = new AppData();
@@ -27,7 +30,7 @@ namespace ServerRackSimulator
 
 
             Console.Clear();
-            Robco.RobcoType("ROB-CO INDUSTRIES (TM) SYSTEMS ONLINE", 15); // eigene classe für den "Robcotype" Effekt, interchangeable mit normalen Console.Writeline
+            Robco.RobcoType("ROB-CO INDUSTRIES (TM) SYSTEMS ONLINE", 15); // eigene klasse für den "Robcotype" Effekt, interchangeable mit normalen Console.Writeline
             Robco.RobcoType("Initialisiere...", 25);
             Robco.RobcoType("ZAX Mainframe.................Verbunden", 30);
 
@@ -37,34 +40,60 @@ namespace ServerRackSimulator
 
             Action_Login();
 
-            
+
 
             bool check = true;
             while (check == true)
             {
+
                 ShowHeader();
-                ShowMainMenu();
+                //oben Header, dann Menü unten
+                //ShowMainMenu();
+                var options = new List<string>()
+                {
+                "[1] Eingeloggter User anzeigen/wechseln (Login)",
+                "[2] User Auswahl (3 Slots verwalten)",
+                "[3] Größenauswahl des Racks (9/15/24/42 HE)",
+                "[4] Erstellen Custom Server (1-4 HE)",
+                "[5] Konfigurierte Racks (speichern/laden/löschen)",
+                "[6] Einstellungen (Namen & Vorlagen & Kosten)",
+                "[7] Beenden",
+                };
 
-                Console.Write("Auswahl: ");
-                string input = Console.ReadLine();
 
+
+                //Console.Write("Auswahl: ");
+                int input = Robco.Menu(options);  //es lebt!!
+
+                input++; // Menü gibt 0-basiert zurück. Fehler dokumentieren!
                 switch (input)
                 {
-                    case "1": Action_Login();
+                    case 1:
+                        Action_Login();
+                        //Console.WriteLine("1"); <-Debughelper
                         break;                              // Eingeloggter User / Login
-                    case "2": Action_UserSelect();
+                    case 2:
+                        Action_UserSelect();
+                        //Console.WriteLine("2");
                         break;                              // User Auswahl / Umbenennen
-                    case "3": Action_RackSelect();
+                    case 3:
+                        Action_RackSelect();
+                        //Console.WriteLine("3");
                         break;                              // Rackgrößen
-                    case "4": Action_CreateCustomServer();
+                    case 4:
+                        Action_CreateCustomServer();
                         break;                              // Custom 1-4HE (c)
-                    case "5": Action_ConfigRacksMenu();
+                    case 5:
+                        Action_ConfigRacksMenu();
                         break;                              // Konfigurationen verwalten
-                    case "6": Action_Settings();
+                    case 6:
+                        Action_Settings();
                         break;                              // Einstellungen inkl. Kosten
-                    case "0": check = false;
+                    case 7:
+                        check = false;
                         break;                              // Beenden
-                    default: Message("Ungültige Auswahl.");
+                    default:
+                        Message("Ungültige Auswahl.");
                         break;
                 }
             }
@@ -72,6 +101,8 @@ namespace ServerRackSimulator
             Save();
             Robco.RobcoType("Programm beendet.");
         }
+
+
 
         //Persistenz 0.2
         private static void LoadOrInit()
@@ -149,16 +180,23 @@ namespace ServerRackSimulator
         // GUI, sort of TODO
         private static void ShowHeader()
         {
+
             Console.Clear();
             Console.WriteLine("===============================================");
-            Robco.RobcoType("        SERVER RACK SIMULATOR....Online ");
+            if (firststart == true)
+            {
+                Robco.RobcoType("        SERVER RACK SIMULATOR....Online ", 25);
+                firststart = false;
+            }
+            else
+                Console.WriteLine("        SERVER RACK SIMULATOR....Online ");
             Console.WriteLine("===============================================");
             Console.WriteLine("Eingeloggt: {0}", _currentUser != null ? _currentUser.Name + " (" + _currentUser.Role + ")" : "—");
             Console.WriteLine("Aktives Rack: {0}", _currentRack != null ? _currentRack.Name : "—");
             Console.WriteLine();
         }
 
-        private static void ShowMainMenu() //Menü alt , v0.2
+        private static void ShowMainMenu() //Menü alt , v0.2 - methode EoL ! Dokumentieren!
         {
             Console.WriteLine("[1] Eingeloggter User anzeigen/wechseln (Login)");
             Console.WriteLine("[2] User Auswahl (3 Slots verwalten)");
@@ -169,6 +207,8 @@ namespace ServerRackSimulator
             Console.WriteLine("[0] Beenden");
             Console.WriteLine();
         }
+        //menu neu v0.3 
+
 
         private static void Message(string msg)
         {
@@ -217,7 +257,7 @@ namespace ServerRackSimulator
             if (a == "1") RenameUserSlots();
         }
 
-        private static void RenameUserSlots()
+        private static void RenameUserSlots()  //rework 
         {
             for (int i = 0; i < _app.Users.Count; i++)
             {
