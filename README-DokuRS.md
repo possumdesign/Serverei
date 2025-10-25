@@ -1,10 +1,10 @@
 # Projektdokumentation – *ServerRackSimulator* (C# Konsole)
 
-> **Lehrgang:** Fachinformatiker/25-3
-> **Autor:** Vieregg, Patrick 
-> **Betreuer/Dozent:** Hr Lutz & Hr Hafner
-> **Datum:** \<18.10.2025>\
-> **Version:** 0.2 (Entwurf)
+> - **Lehrgang:** Fachinformatiker/25-3
+> - **Autor:** Vieregg, Patrick 
+> - **Betreuer/Dozent:** Hr Lutz & Hr Hafner
+> - **Datum:** \<18.10.2025>\
+> - **Version:** 0.2 (Entwurf)
 
 ---
 
