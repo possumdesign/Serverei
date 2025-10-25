@@ -18,8 +18,25 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "server19.cs",
+              "DocumentMoniker": "C:\\Users\\white\\source\\repos\\Serverei\\server19.cs",
+              "RelativeDocumentMoniker": "server19.cs",
+              "ToolTip": "C:\\Users\\white\\source\\repos\\Serverei\\server19.cs",
+              "RelativeToolTip": "server19.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-16T12:16:52.789Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -37,23 +54,6 @@
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "server19.cs",
-              "DocumentMoniker": "C:\\Users\\white\\source\\repos\\Serverei\\server19.cs",
-              "RelativeDocumentMoniker": "server19.cs",
-              "ToolTip": "C:\\Users\\white\\source\\repos\\Serverei\\server19.cs",
-              "RelativeToolTip": "server19.cs",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAAACEAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-16T12:16:52.789Z",
-              "EditorCaption": ""
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "serverei.cs",
@@ -65,6 +65,10 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-16T08:12:29.318Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             }
           ]
         },

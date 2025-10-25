@@ -17,7 +17,7 @@ namespace ServerRackSimulator
         public static void RobcoBG()
         {
             Console.BackgroundColor = ConsoleColor.DarkGreen;
-            Console.ForegroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Clear();
             //debugMSG
             // Console.WriteLine("ROB-CO INDUSTRIES (TM) SYSTEMS ONLINE");
@@ -31,27 +31,26 @@ namespace ServerRackSimulator
             }
             Console.WriteLine();
         }
-        public static void Menu(List<string> options)
+        public static void Menu()
 
         {
             Console.OutputEncoding = Encoding.UTF8;
-            // Robco.RobcoBG();       //warscheinlich unnötig hier
+            Robco.RobcoBG();
             int auswahl = 0;
-           /* List<string> options = new List<string>()
+            List<string> options = new List<string>()
         {
-            "[1] Eingeloggter User anzeigen/wechseln (Login)",
-            "[2] User Auswahl (3 Slots verwalten)",
-            "[3] Größenauswahl des Racks (9/15/24/42 HE)",
-            "[4] Erstellen Custom Server (1-4 HE)",
-            "[5] Konfigurierte Racks (speichern/laden/löschen)",
-            "[6] Einstellungen (Namen & Vorlagen & Kosten)",
-            "[0] Beenden",
-        };   */
+            "1. Serverrack erstellen",
+            "2. Serverrack laden",
+            "3. Serverrack löschen",
+            "4. Einstellungen",
+            "5. Statistics",
+            "6. Beenden",
+        };
             while (true)
             {
 
                 Console.Clear();
-                Console.WriteLine("\n================");
+                Console.WriteLine("\n\n\n\n============================================");
                 for (int i = 0; i < options.Count; i++)
                 {
                     if (i == auswahl)

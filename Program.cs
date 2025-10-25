@@ -25,7 +25,7 @@ namespace ServerRackSimulator
 
             Robco.RobcoBG();
 
-            Console.ReadKey();
+
             Console.Clear();
             Robco.RobcoType("ROB-CO INDUSTRIES (TM) SYSTEMS ONLINE", 15); // eigene classe für den "Robcotype" Effekt, interchangeable mit normalen Console.Writeline
             Robco.RobcoType("Initialisiere...", 25);
@@ -205,7 +205,7 @@ namespace ServerRackSimulator
             Message("Login fehlgeschlagen.");
         }
 
-        private static void Action_UserSelect() //eventuell mit return methode reworken
+        private static void Action_UserSelect()
         {
             Console.Clear();
             Console.WriteLine("USER AUSWAHL / VERWALTUNG");
@@ -217,7 +217,7 @@ namespace ServerRackSimulator
             if (a == "1") RenameUserSlots();
         }
 
-        private static void RenameUserSlots()  //rework 
+        private static void RenameUserSlots()
         {
             for (int i = 0; i < _app.Users.Count; i++)
             {
