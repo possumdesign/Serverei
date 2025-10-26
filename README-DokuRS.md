@@ -256,6 +256,7 @@ gantt
     section Planung & Dokumentation
     Live-Dokumentation README-DokuRS :b1, 2025-10-16  , 8d
     Präsentation :after b1, 1d
+    Markdown Grundkurs: 2025-10-19, 7d
 ```
 ## 12. Dokumentation
 
