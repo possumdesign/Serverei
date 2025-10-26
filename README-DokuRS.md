@@ -17,6 +17,9 @@
 
 ## 2. Ausgangssituation & Zielsetzung
 
+**Projektantrag**
+
+  ![Projektantrag](/images/pantrag.png) 
 - **Ausgangssituation:** Lernprojekt (Anwendungsentwicklung Grundlagen), Grundlagen in Schleifen, Klassen, Konstruktoren und einfacher Vererbung. 
 - **Projektziel:** Funktionsfähiger Proof-of-Concept zur Rack-Konfiguration inkl. Kostenübersicht und Ausfall-Simulation.
 
@@ -53,8 +56,6 @@
 - **Persistenz:** Eine Datei `data.json` im Programmverzeichnis.
 - **Kontext:** Standalone-Konsolenanwendung; keine Netzwerkanbindung.
 - **Annahmen:** HE-Logik: fortlaufende Slots 1..N; erster passender freier Slot wird belegt.
-
-*(Platzhalter für Kontextdiagramm)*
 
 ```
 [Benutzer] ──(Konsole)──> ServerRackSimulator ──(JSON)──> data.json
