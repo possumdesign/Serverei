@@ -17,9 +17,11 @@
 
 ## 2. Ausgangssituation & Zielsetzung
 
-**Projektantrag**
+<details>
+<summary><ins>Projektantrag</ins> </summary>
 
   ![Projektantrag](/images/pantrag.png) 
+  </details>
 - **Ausgangssituation:** Lernprojekt (Anwendungsentwicklung Grundlagen), Grundlagen in Schleifen, Klassen, Konstruktoren und einfacher Vererbung. 
 - **Projektziel:** Funktionsfähiger Proof-of-Concept zur Rack-Konfiguration inkl. Kostenübersicht und Ausfall-Simulation.
 
