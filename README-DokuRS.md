@@ -476,7 +476,13 @@ private static void ShowHeader()
 }
 ```
 
-### 12.2 Lizenz & Quellen
+### 12.2 Merge Branch *github*
+
+Nach mehreren Uploadfehlern wurde ein neuer Branch `runningVersion` erstellt, und dieser (teilweise) manuell mit der `main` Branch gemerged:
+
+[Commit github.com](https://github.com/possumdesign/Serverei/pull/2/commits/6b6b5785d6654485314c755e9475f96c39edbb54)
+
+### 12.3 Lizenz & Quellen
 
 - Nur .NET-Standardbibliothek.
 - Beispieldaten fiktiv, Rechercheaufwand viel zu hoch.
