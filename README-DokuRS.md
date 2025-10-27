@@ -36,7 +36,6 @@
 | 24.10.2025 | Neue `RobCo` Klasse, aktuelle Flowchart<br> und `mermaid` Diagramme in .md erstellt | Überarbeitung vom `json` Speichersystem und<br> Menu auf Pfeiltastensteuerung.     | Fehlersuche im Code, sowie Githubunordnung<br>durch "Anfänger"Fehler     |
 | 27.10.2025 | `Markdown` und `mermaid` Skillset vertieft und<br>die Dokumentaion überarbeitet.<br> Neue Branch `runningVersion` angelegt und<br>mit `main` gemerged. | Weitere Fehlersuche, kleinere Überarbeitungen,<br>sowie Codepflege durch `Chat GPT-5`*Thinkingmode* | Wie am 24.10.2025 inklusive Branchmerge<br>und Github Struktur überarbeiten |
 
-
 <details>
 <summary><ins>Flowchart0.1</ins> </summary>
 
