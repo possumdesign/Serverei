@@ -440,12 +440,7 @@ Kosten(Einschub) = BasePerU * HeightU
 
 ## 11. Projektplanung 
 
-- **M1:** Grundgerüst & Menü (Tag 1-3)
-- **M2:** Vererbung & Platzlogik (Tag 2)
-- **M3:** Persistenz & Laden/Speichern (Tag 2-5) **ehrlicherweise inkl Zeit am Wochenende**
-- **M4:** Kostenmodell & Ausfall (Tag 3-7)  
-- **M5:** Doku & Tests ,mitlaufende Dokumentation (Tag 1-7)    
-
+- Projektablauf als `Gantt` Diagramm
 ```mermaid
 gantt
     title Projektablauf
