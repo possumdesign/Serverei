@@ -41,7 +41,13 @@
 
   ![Flowchart 0.1](/images/serverei.drawio.svg) 
 </details>
----
+
+<details>
+<summary><ins>Finale Flowchart *Chat GPT*</ins> </summary>
+
+  ![Flowchart 0.1](images/finalflowchartGPT.svg) 
+</details>
+
 ---
 
 ## 3. Anforderungen
