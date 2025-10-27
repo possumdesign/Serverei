@@ -686,6 +686,25 @@ private static void ShowHeader()
 Nach mehreren Uploadfehlern wurde ein neuer Branch `runningVersion` erstellt, und dieser (teilweise) manuell mit der `main` Branch gemerged:
 
 [Commit github.com](https://github.com/possumdesign/Serverei/pull/2/commits/6b6b5785d6654485314c755e9475f96c39edbb54)
+**Schematische Darstellung**
+```mermaid
+gitGraph
+    commit id:"Testversion 1"
+    commit id:"Testversion 2"
+    branch RunningVersion
+    commit id:"Neuer Ansatz"
+    commit id:"Manueller Upload"
+    checkout main
+    commit id: "Fehlerhaft"
+    commit id: "Rettungsversuch"
+    checkout main
+    merge RunningVersion
+    commit id:"Version lauffähig"
+    commit id:"Dokumentation"
+    commit id:"etc..."
+    checkout main
+```
+---
 
 ### 12.3 Lizenz & Quellen
 
