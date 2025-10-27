@@ -647,7 +647,7 @@ int input = Robco.Menu(options);  //es lebt!!
     Robco.RobcoType("Programm beendet.");
 }
 ```
-Ein weiterer Designfehler: sich wiederholende "LAufschrift", animierte Version von console.WriteLine:
+Ein weiterer Designfehler: sich wiederholende "Laufschrift", animierte Version von console.WriteLine:
 - Animierte Schrift:
 ```C#
 public static void RobcoType(string text, int delay = 30)
