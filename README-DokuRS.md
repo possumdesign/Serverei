@@ -708,6 +708,8 @@ gitGraph
 
 ### 12.3 Lizenz & Quellen
 
+<img src="/images/mermaidman.webp" alt="Logo" width="100" height="100" align="right">
+
 - Nur .NET-Standardbibliothek.
 - Beispieldaten fiktiv, Rechercheaufwand viel zu hoch.
 - Chat-GPT 5. **Thinking mode**
