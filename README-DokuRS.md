@@ -715,7 +715,7 @@ gitGraph
 - Nur .NET-Standardbibliothek.
 - Beispieldaten fiktiv, Rechercheaufwand viel zu hoch.
 - Chat-GPT 5. **Thinking mode**
-- Kursunterlagen, speziell ToDoManager.
+- Kursunterlagen, speziell `ToDoManager`.
 - Udemy C# Komplettkurs. https://www.udemy.com/course/die-komplette-csharp-masterclass/
 - draw.io Flowchart für Erstplanung https://app.diagrams.net/
 - Mermaid https://mermaid.js.org/syntax/gantt.html
