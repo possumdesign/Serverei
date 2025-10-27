@@ -1,5 +1,7 @@
 # Projektdokumentation – *ServerRackSimulator* (C# Konsole)
 
+<img src="https://github.com/possumdesign.png" alt="GitHub Avatar" width="100" height="100" align="right">
+
 > - **Lehrgang:** Fachinformatiker/25-3
 > - **Autor:** Vieregg, Patrick 
 > - **Betreuer/Dozent:** Hr Lutz & Hr Hafner
@@ -708,7 +710,7 @@ gitGraph
 
 ### 12.3 Lizenz & Quellen
 
-<img src="/images/mermaidman.webp" alt="Logo" width="100" height="100" align="right">
+<img src="/images/mermaidman.webp" alt="MermaidMan" width="100" height="100" align="right">
 
 - Nur .NET-Standardbibliothek.
 - Beispieldaten fiktiv, Rechercheaufwand viel zu hoch.
