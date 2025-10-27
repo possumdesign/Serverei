@@ -220,6 +220,106 @@ namespace ServerRackSimulator
 }
 
 ```
+#### 5.2.1 Speichersystem `json` mit Data Transfer Object (DTO)
+- Ein DTO ist ein Entwurfsmuster, das verwendet wird, um Daten zwischen verschiedenen Schichten einer Anwendung oder zwischen verschiedenen Systemen zu übertragen.<br>In diesem Szenario übernommen von `Chat GPT 5` nach Vorschlag und Erklärung:<br>
+Da `BaseServer` abstrakt ist (Unterklassen He1..He4), wird für die Persistenz ein DTO eingesetzt, das nur primitive Felder enthält. Beim Laden wird aus dem DTO wieder die konkrete Klasse erzeugt.
+```C#
+// AppData: Wurzelobjekt der JSON-Datei
+internal class AppData
+{
+    public List<User> Users = new List<User>();
+    public List<BaseServer> ServerTemplates = new List<BaseServer>(); // „b“=Base, „c“=Custom
+    public List<RackConfig> Configurations = new List<RackConfig>();
+    public CostSettings Costs = CostSettings.CreateDefaults();
+}
+
+// Abstrakt + Unterklassen (gekürzt)
+internal abstract class BaseServer
+{
+    public string Typ;
+    public int HeightU, FanMm, FanCount, Netzteile, SSD, HDD, GPU;
+    public string Origin; // „b“ oder „c“
+    public abstract BaseServer Clone();
+}
+
+internal class He1 : BaseServer { /* ctor setzt HeightU=1 */ public override BaseServer Clone() => new He1(/*...*/); }
+// He2/He3/He4 analog…
+
+// DTO vermeidet Probleme beim Serialisieren abstrakter Typen
+internal class BaseServerDTO
+{
+    public string Typ, Origin;
+    public int HeightU, FanMm, FanCount, Netzteile, SSD, HDD, GPU;
+
+    public static BaseServerDTO FromServer(BaseServer s) => new BaseServerDTO {
+        Typ = s.Typ, Origin = s.Origin, HeightU = s.HeightU,
+        FanMm = s.FanMm, FanCount = s.FanCount,
+        Netzteile = s.Netzteile, SSD = s.SSD, HDD = s.HDD, GPU = s.GPU
+    };
+
+    public BaseServer ToServer()
+    {
+        if (HeightU == 1) return new He1(Typ, FanMm, FanCount, Netzteile, SSD, HDD, GPU, Origin);
+        if (HeightU == 2) return new He2(Typ, FanMm, FanCount, Netzteile, SSD, HDD, GPU, Origin);
+        if (HeightU == 3) return new He3(Typ, FanMm, FanCount, Netzteile, SSD, HDD, GPU, Origin);
+        return new He4(Typ, FanMm, FanCount, Netzteile, SSD, HDD, GPU, Origin);
+    }
+}
+
+```
+`System.Text.Json` speichert ohne Typdiskriminator nur die Felder des Basistyps; mit DTO steuern wir den Rückweg in die richtige Unterklasse über `HeightU`.
+```C#
+using System.Text;
+using System.Text.Json;
+using System.IO;
+
+private const string DataFile = "data.json";
+private static AppData _app = new AppData();
+
+private static void Save()
+{
+    var options = new JsonSerializerOptions {
+        WriteIndented = true,
+        IncludeFields = true   // weil wir öffentliche Felder (keine Properties) nutzen
+    };
+    string json = JsonSerializer.Serialize(_app, options);
+    File.WriteAllText(DataFile, json, Encoding.UTF8);
+}
+
+private static void LoadOrInit()
+{
+    if (File.Exists(DataFile))
+    {
+        try
+        {
+            var options = new JsonSerializerOptions { IncludeFields = true };
+            string json = File.ReadAllText(DataFile, Encoding.UTF8);
+            _app = JsonSerializer.Deserialize<AppData>(json, options) ?? new AppData();
+            // Sicherstellen, dass Listen gesetzt sind (robust gegen alte/defekte Dateien)
+            if (_app.Users == null) _app.Users = new List<User>();
+            if (_app.ServerTemplates == null) _app.ServerTemplates = new List<BaseServer>();
+            if (_app.Configurations == null) _app.Configurations = new List<RackConfig>();
+            if (_app.Costs == null) _app.Costs = CostSettings.CreateDefaults();
+            return;
+        }
+        catch { /* Datei defekt → auf Defaults zurückfallen */ }
+    }
+
+    // Defaults beim ersten Start oder bei Fehler
+    _app = new AppData();
+    _app.Users.Add(new User("Admin", Role.Admin));
+    _app.Users.Add(new User("User1", Role.User));
+    _app.Users.Add(new User("User2", Role.User));
+    _app.Users.Add(new User("User3", Role.User));
+    _app.ServerTemplates.Add(new He1("1HE Router", 40, 4, 1, 1, 0, 0, "b"));
+    _app.ServerTemplates.Add(new He2("2HE Compute", 60, 6, 2, 2, 4, 1, "b"));
+    _app.Costs = CostSettings.CreateDefaults();
+    Save();
+}
+
+```
+
+---
 
 - **DTO für JSON:** `BaseServerDTO` vermeidet Polymorphie-Probleme beim Speichern. **Chat GPT-5**
 
