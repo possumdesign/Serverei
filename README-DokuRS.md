@@ -21,10 +21,28 @@
 <summary><ins>Projektantrag</ins> </summary>
 
   ![Projektantrag](/images/pantrag.png) 
-  </details>
+</details>
+
 - **Ausgangssituation:** Lernprojekt (Anwendungsentwicklung Grundlagen), Grundlagen in Schleifen, Klassen, Konstruktoren und einfacher Vererbung. 
 - **Projektziel:** Funktionsfähiger Proof-of-Concept zur Rack-Konfiguration inkl. Kostenübersicht und Ausfall-Simulation.
 
+### 2.1 Stand-Up Meeting Zusammenfassung
+
+| Datum      | Vortag                              | Geplant für Heute                                                                 | Probleme                                                                 |
+|------------|-------------------------------------|------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| 16.10.2025 | Keine (erster Projekttag)           | Flowchart-Diagramm des Grundkonzepts<br>Erste Klassen und Menu-Tests<br>Tagesplanung und Ki-Zeitschätzung | Keine (erster Projekttag)                                                |
+| 17.10.2025 | Flowchart abgeschlossen<br>Vererbung der HE-Server von `Baseserver` | Menu-Stil von der Übungsaufgabe `ToDo Manager`<br>Json Dateien angelegt, und testweise beschrieben | Code der Ausgabe und der `back`-Funktion<br>überarbeitet und neu konzeptioniert |
+| 20.10.2025 | Anzahl `User`auf 3 gesetzt, sowie ein `admin`.<br>Vererbung finalisiert und Dokumentation<br> in markdown begleitend begonnen | Weitere Versuche zur Darstellung von Menu<br>und Ausgabe der in `json` angelegten Daten | Wiederholende Codeblöcke im Menu<br>und Headerbereich überarbeitet      |
+| 24.10.2025 | Neue `RobCo` Klasse, aktuelle Flowchart<br> und `mermaid` Diagramme in .md erstellt | Überarbeitung vom `json` Speichersystem und<br> Menu auf Pfeiltastensteuerung.     | Fehlersuche im Code, sowie Githubunordnung<br>durch "Anfänger"Fehler     |
+| 27.10.2025 | `Markdown` und `mermaid` Skillset vertieft und<br>die Dokumentaion überarbeitet.<br> Neue Branch `runningVersion` angelegt und<br>mit `main` gemerged. | Weitere Fehlersuche, kleinere Überarbeitungen,<br>sowie Codepflege durch `Chat GPT-5`*Thinkingmode* | Wie am 24.10.2025 inklusive Branchmerge<br>und Github Struktur überarbeiten |
+
+
+<details>
+<summary><ins>Flowchart0.1</ins> </summary>
+
+  ![Flowchart 0.1](/images/serverei.drawio.svg) 
+</details>
+---
 ---
 
 ## 3. Anforderungen
