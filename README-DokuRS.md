@@ -37,7 +37,7 @@
 | 20.10.2025 | Anzahl `User`auf 3 gesetzt, sowie ein `admin`.<br>Vererbung finalisiert und Dokumentation<br> in markdown begleitend begonnen | Weitere Versuche zur Darstellung von Menu<br>und Ausgabe der in `json` angelegten Daten | Wiederholende Codeblöcke im Menu<br>und Headerbereich überarbeitet      |
 | 24.10.2025 | Neue `RobCo` Klasse, aktuelle Flowchart<br> und `mermaid` Diagramme in .md erstellt | Überarbeitung vom `json` Speichersystem und<br> Menu auf Pfeiltastensteuerung.     | Fehlersuche im Code, sowie Githubunordnung<br>durch "Anfänger"Fehler     |
 | 27.10.2025 | `Markdown` und `mermaid` Skillset vertieft und<br>die Dokumentaion überarbeitet.<br> Neue Branch `runningVersion` angelegt und<br>mit `main` gemerged. | Weitere Fehlersuche, kleinere Überarbeitungen,<br>sowie Codepflege durch <br>`Chat GPT-5`*Thinkingmode* | Wie am 24.10.2025 inklusive Branchmerge<br>und Github Struktur überarbeiten |
-
+| 28.10.2025 |Dokumentation überarbeitet, neuesc`mermaid`<br>Diagramm | Präsentation & Abgabe | Bugfixes im `programm.cs`, Typos und Formatierung<br>in der Dukumentation |
 <details>
 <summary><ins>Flowchart0.1</ins> </summary>
 
